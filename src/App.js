@@ -34,7 +34,11 @@ class App extends Component {
       this.removeAttribute(fieldId);
     }
 
-    if (attributes[fieldId] !== '') {
+    if (
+      attributes[fieldId] &&
+      attributes[fieldId].length <= 1 &&
+      attributes[fieldId].length > 0
+    ) {
       attributes[fieldId + 1] = '';
     }
 
