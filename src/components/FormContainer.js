@@ -1,33 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
-import { Row, Col, CardText } from 'mdbreact';
+import { Row, Col, CardText } from 'reactstrap';
 
 import SavedAttributes from './SavedAttributes';
 import DynamicForm from './DynamicForm';
 
-export default class FormContainer extends Component {
-  render() {
-    const { savedAttributes, attributes } = this.props;
-    return (
-      <Row>
-        <Col sm="4">
-          {!_.isEmpty(savedAttributes) ? (
-            <SavedAttributes {...this.props} />
-          ) : (
-            <CardText>test field</CardText>
-          )}
-        </Col>
-        <Col sm="8">
-          {_.map(attributes, (attribute, key) => (
-            <DynamicForm
-              {...this.props}
-              attribute={attribute}
-              key={key}
-              fieldId={key}
-            />
-          ))}
-        </Col>
-      </Row>
-    );
-  }
-}
+export default props => (
+  <Row>
+    <Col lg="4">
+      {!_.isEmpty(props.savedAttributes) ? (
+        <SavedAttributes {...props} />
+      ) : (
+        <CardText className="mb-3">test field</CardText>
+      )}
+    </Col>
+    <Col lg="8">
+      {_.map(props.attributes, (attribute, key) => (
+        <DynamicForm {...props} attribute={attribute} key={key} fieldId={key} />
+      ))}
+    </Col>
+  </Row>
+);

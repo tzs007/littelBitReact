@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import { Container, Col, Row, Card, CardBody } from 'mdbreact';
+import { Container, Col, Row, Card, CardBody } from 'reactstrap';
 import 'mdbreact/dist/css/mdb.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -14,28 +14,28 @@ class App extends Component {
     super(props);
     this.state = {
       attributes: { 0: '' },
-      savedAttributes: {},
+      savedAttributes: [],
     };
   }
 
-  removeAttribute = key => {
+  removeAttribute = fieldId => {
+    console.log('clicked');
     const { attributes } = this.state;
-    delete attributes[key];
+    delete attributes[fieldId];
     this.setState({ attributes });
   };
 
-  onAttributeChange = (e, key) => {
+  onAttributeChange = (e, fieldId) => {
+    fieldId = parseInt(fieldId, 10);
     const { attributes } = this.state;
     const value = e.target.value;
-    attributes[key] = value;
+    attributes[fieldId] = value;
     if (value === '') {
-      this.removeAttribute(key);
+      this.removeAttribute(fieldId);
     }
 
-    const length = Object.keys(attributes).length;
-
-    if (attributes[length] !== '' && attributes[length + 1] !== '') {
-      attributes[key + 1] = '';
+    if (attributes[fieldId] !== '') {
+      attributes[fieldId + 1] = '';
     }
 
     this.setState({ attributes });
@@ -88,6 +88,9 @@ App.propTypes = {
   attribute: PropTypes.string,
   attributes: PropTypes.object,
   savedAttributes: PropTypes.array,
+  fieldId: PropTypes.number,
+  onAttributeChange: PropTypes.func,
+  removeAttribute: PropTypes.func,
 };
 
 export default App;

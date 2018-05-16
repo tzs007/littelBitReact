@@ -1,20 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import _ from 'lodash';
-import { ListGroup, ListGroupItem } from 'mdbreact';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
-export default class SavedAttributes extends Component {
-  render() {
-    const { savedAttributes } = this.props;
-    return (
-      <ListGroup>
-        <ListGroupItem className="font-weight-bold">
-          Congrats!<br />
-          You have saved those attributes.
-        </ListGroupItem>
-        {_.map(savedAttributes, (savedAttribute, index) => (
-          <ListGroupItem key={index}>{savedAttribute}</ListGroupItem>
-        ))}
-      </ListGroup>
-    );
-  }
-}
+export default props => (
+  <ListGroup className="mb-3">
+    <ListGroupItem className="font-weight-bold">
+      Congrats!<br />
+      You have saved those attributes.
+    </ListGroupItem>
+    {_.map(props.savedAttributes, (savedAttribute, index) => (
+      <ListGroupItem key={index}>{savedAttribute}</ListGroupItem>
+    ))}
+  </ListGroup>
+);
