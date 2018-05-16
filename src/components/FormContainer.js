@@ -11,10 +11,11 @@ export default class FormContainer extends Component {
     return (
       <Row>
         <Col sm="4">
-          <CardText>test</CardText>
           {!_.isEmpty(savedAttributes) ? (
             <SavedAttributes {...this.props} />
-          ) : null}
+          ) : (
+            <CardText>test field</CardText>
+          )}
         </Col>
         <Col sm="8">
           {_.map(attributes, (attribute, key) => (
